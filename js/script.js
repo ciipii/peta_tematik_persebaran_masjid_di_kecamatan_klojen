@@ -14,7 +14,7 @@ const translations = {
     nav_layout: "Layout",
     nav_webgis: "WebGIS",
     nav_data: "Data",
-    nav_profile: "Profile Saya",
+    nav_profile: "Profil Saya",
     hero_badge: "Sistem Informasi Geografis",
     hero_title: "Pemetaan Spasial <br />Masjid di Kecamatan Klojen",
     hero_desc: "Visualisasi interaktif 15 titik strategis tempat ibadah di jantung Kota Malang. Dibangun dengan teknologi QGIS dan Web Mapping modern.",
