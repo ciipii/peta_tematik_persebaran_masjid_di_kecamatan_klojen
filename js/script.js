@@ -1,89 +1,16 @@
-// 1. Initialize Animation
+// 1. Initialize Animation (AOS)
 AOS.init({ once: true, offset: 100, duration: 800 });
 
-// 2. THEME & LANGUAGE LOGIC
+// 2. THEME LOGIC (Dark/Light Mode)
 const themeToggle = document.getElementById("themeToggle");
 const themeIcon = document.getElementById("themeIcon");
-const langToggle = document.getElementById("langToggle");
 const htmlEl = document.documentElement;
 
-// Dictionary Bahasa
-const translations = {
-  id: {
-    nav_home: "Beranda",
-    nav_layout: "Layout",
-    nav_webgis: "WebGIS",
-    nav_data: "Data",
-    nav_profile: "Profil Saya",
-    hero_badge: "Sistem Informasi Geografis",
-    hero_title: "Pemetaan Spasial <br />Masjid di Kecamatan Klojen",
-    hero_desc: "Visualisasi interaktif 15 titik strategis tempat ibadah di jantung Kota Malang. Dibangun dengan teknologi QGIS dan Web Mapping modern.",
-    btn_explore: "Mulai Jelajah",
-    btn_directory: "Lihat Direktori",
-    stat_points: "Titik Masjid",
-    stat_coord: "Sistem Koordinat",
-    layout_desc: "Tampilan kartografi standar layout peta Kecamatan Klojen.",
-    btn_newtab: "Buka Tab Baru",
-    btn_download: "Unduh Layout",
-    webgis_desc: "Gunakan fitur zoom dan pan untuk eksplorasi detail lokasi.",
-    btn_fullscreen: "Mode Layar Penuh",
-    dir_title: "Direktori Masjid",
-    dir_desc: "Daftar lengkap 15 masjid yang terdata dalam sistem.",
-    table_header: "Data Masjid",
-    th_name: "Nama Masjid",
-    th_address: "Alamat Lengkap",
-    th_nav: "Navigasi",
-    btn_load: "Memuat Data...",
-    btn_show_more: "Tampilkan Semua",
-    btn_show_less: "Tampilkan Lebih Sedikit",
-    profile_role: "Prodi Teknik Informatika",
-    profile_quote: '"Website ini dikembangkan sebagai tugas akhir mata kuliah <strong>Sistem Informasi Geografis (SIG)</strong> di Institut Asia Malang."',
-    search_placeholder: "Cari nama atau jalan...",
-  },
-  en: {
-    nav_home: "Home",
-    nav_layout: "Layout",
-    nav_webgis: "WebGIS",
-    nav_data: "Data",
-    nav_profile: "My Profile",
-    hero_badge: "Geographic Information System",
-    hero_title: "Spatial Mapping of <br />Mosques in Klojen District",
-    hero_desc: "Interactive visualization of 15 strategic worship places in the heart of Malang City. Built with QGIS and modern Web Mapping technology.",
-    btn_explore: "Start Exploring",
-    btn_directory: "View Directory",
-    stat_points: "Mosque Points",
-    stat_coord: "Coordinate System",
-    layout_desc: "Standard cartographic layout display of Klojen District map.",
-    btn_newtab: "Open New Tab",
-    btn_download: "Download Layout",
-    webgis_desc: "Use zoom and pan features to explore location details.",
-    btn_fullscreen: "Fullscreen Mode",
-    dir_title: "Mosque Directory",
-    dir_desc: "Complete list of 15 mosques recorded in the system.",
-    table_header: "Mosque Data",
-    th_name: "Mosque Name",
-    th_address: "Full Address",
-    th_nav: "Navigation",
-    btn_load: "Loading Data...",
-    btn_show_more: "Show All",
-    btn_show_less: "Show Less",
-    profile_role: "Informatics Engineering Program",
-    profile_quote: '"This website was developed as a final project for the <strong>Geographic Information Systems (GIS)</strong> course at Asia Institute Malang."',
-    search_placeholder: "Search name or street...",
-  },
-};
-
-// Set Initial Theme
+// Cek preferensi tema tersimpan
 const savedTheme = localStorage.getItem("theme") || "light";
 htmlEl.setAttribute("data-theme", savedTheme);
 updateThemeIcon(savedTheme);
 
-// Set Initial Lang
-let currentLang = localStorage.getItem("lang") || "id";
-langToggle.textContent = currentLang.toUpperCase();
-applyLanguage(currentLang);
-
-// Theme Event
 themeToggle.addEventListener("click", () => {
   const currentTheme = htmlEl.getAttribute("data-theme");
   const newTheme = currentTheme === "light" ? "dark" : "light";
@@ -100,7 +27,77 @@ function updateThemeIcon(theme) {
   }
 }
 
-// Language Event
+// 3. LANGUAGE LOGIC (ID/EN)
+const langToggle = document.getElementById("langToggle");
+let currentLang = localStorage.getItem("lang") || "id";
+langToggle.textContent = currentLang.toUpperCase();
+
+// Dictionary Bahasa
+const translations = {
+  id: {
+    nav_home: "Beranda",
+    nav_layout: "Layout",
+    nav_webgis: "WebGIS",
+    nav_data: "Data",
+    nav_profile: "Profil Saya",
+    hero_badge: "Sistem Informasi Geografis",
+    hero_title: "Pemetaan Spasial <br />Masjid di Kecamatan Klojen",
+    hero_desc: "Visualisasi interaktif 15 titik strategis tempat ibadah di jantung Kota Malang.",
+    btn_explore: "Mulai Jelajah",
+    btn_directory: "Lihat Direktori",
+    stat_points: "Titik Masjid",
+    stat_coord: "Sistem Koordinat",
+    layout_desc: "Tampilan kartografi standar layout peta Kecamatan Klojen.",
+    btn_newtab: "Buka Tab Baru",
+    btn_download: "Unduh Layout",
+    webgis_desc: "Gunakan fitur zoom dan pan untuk eksplorasi detail lokasi.",
+    btn_fullscreen: "Mode Layar Penuh",
+    dir_title: "Direktori Masjid",
+    dir_desc: "Daftar lengkap 15 masjid yang terdata.",
+    table_header: "Data Masjid",
+    th_name: "Nama Masjid",
+    th_address: "Alamat Lengkap",
+    th_nav: "Navigasi",
+    btn_show_more: "Tampilkan Semua",
+    btn_show_less: "Tampilkan Lebih Sedikit",
+    profile_role: "Prodi Teknik Informatika",
+    profile_quote: '"Website ini dikembangkan sebagai tugas akhir mata kuliah Sistem Informasi Geografis."',
+    search_placeholder: "Cari nama masjid...",
+  },
+  en: {
+    nav_home: "Home",
+    nav_layout: "Layout",
+    nav_webgis: "WebGIS",
+    nav_data: "Data",
+    nav_profile: "My Profile",
+    hero_badge: "Geographic Information System",
+    hero_title: "Spatial Mapping of <br />Mosques in Klojen District",
+    hero_desc: "Interactive visualization of 15 strategic worship places in Malang City.",
+    btn_explore: "Start Exploring",
+    btn_directory: "View Directory",
+    stat_points: "Mosque Points",
+    stat_coord: "Coordinate System",
+    layout_desc: "Standard cartographic layout of Klojen District map.",
+    btn_newtab: "Open New Tab",
+    btn_download: "Download Layout",
+    webgis_desc: "Use zoom and pan features to explore location details.",
+    btn_fullscreen: "Fullscreen Mode",
+    dir_title: "Mosque Directory",
+    dir_desc: "Complete list of 15 mosques.",
+    table_header: "Mosque Data",
+    th_name: "Mosque Name",
+    th_address: "Full Address",
+    th_nav: "Navigation",
+    btn_show_more: "Show All",
+    btn_show_less: "Show Less",
+    profile_role: "Informatics Engineering Student",
+    profile_quote: '"This website was developed as a final project for GIS course."',
+    search_placeholder: "Search mosque name...",
+  },
+};
+
+applyLanguage(currentLang);
+
 langToggle.addEventListener("click", () => {
   currentLang = currentLang === "id" ? "en" : "id";
   localStorage.setItem("lang", currentLang);
@@ -117,10 +114,11 @@ function applyLanguage(lang) {
       el.innerHTML = translations[lang][key];
     }
   });
-  document.getElementById("searchInput").placeholder = translations[lang].search_placeholder;
+  const searchInput = document.getElementById("searchInput");
+  if (searchInput) searchInput.placeholder = translations[lang].search_placeholder;
 }
 
-// 3. Navbar Scroll Effect Logic
+// 4. NAVBAR SCROLL EFFECT
 const navbar = document.querySelector(".navbar");
 window.addEventListener("scroll", () => {
   if (window.scrollY > 50) {
@@ -130,33 +128,7 @@ window.addEventListener("scroll", () => {
   }
 });
 
-// 4. ScrollSpy Logic
-const sections = document.querySelectorAll("section");
-const navLinks = document.querySelectorAll(".nav-link");
-
-function highlightMenu() {
-  let current = "";
-  if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 50) {
-    current = "profile";
-  } else {
-    sections.forEach((section) => {
-      const sectionTop = section.offsetTop;
-      if (window.pageYOffset >= sectionTop - 150) {
-        current = section.getAttribute("id");
-      }
-    });
-  }
-  navLinks.forEach((li) => {
-    li.classList.remove("active");
-    if (li.getAttribute("href").includes(current)) {
-      li.classList.add("active");
-    }
-  });
-}
-window.addEventListener("scroll", highlightMenu);
-window.addEventListener("load", highlightMenu);
-
-// 5. Data Masjid
+// 5. DATA MASJID (DATABASE)
 const masjidData = [
   { name: "Masjid Al Ikhlas", location: "Bareng", address: "Jl. Raya Langsep, Bareng, Kota Malang" },
   { name: "Masjid Besar Quba", location: "Bareng", address: "Jl. Terusan Ijen No.24, Bareng" },
@@ -175,16 +147,19 @@ const masjidData = [
   { name: "Masjid Darussalam", location: "Rampal", address: "Jl. Jaksa Agung Suprapto, Rampal" },
 ];
 
-// 6. Logic Rendering Table
+// 6. LOGIC RENDERING TABLE & BUTTON VIEW ALL
 const tableBody = document.getElementById("masjid-list-body");
 const viewBtn = document.getElementById("viewAllBtn");
 const searchInput = document.getElementById("searchInput");
-let isExpanded = false;
+let isExpanded = false; // Status awal: Hanya tampil 5 baris
 
 function renderTable(keyword = "") {
   tableBody.innerHTML = "";
+
+  // Filter Data berdasarkan Pencarian
   const filteredData = masjidData.filter((item) => item.name.toLowerCase().includes(keyword.toLowerCase()) || item.address.toLowerCase().includes(keyword.toLowerCase()));
 
+  // Jika Data Kosong
   if (filteredData.length === 0) {
     const msg = currentLang === "id" ? "Data tidak ditemukan" : "Data not found";
     tableBody.innerHTML = `<tr><td colspan="4" class="text-center py-4 text-muted">${msg}</td></tr>`;
@@ -192,18 +167,20 @@ function renderTable(keyword = "") {
     return;
   }
 
+  // Tentukan Limit (5 atau Semua)
   let limit;
   if (keyword.length > 0) {
-    limit = filteredData.length;
-    viewBtn.style.display = "none";
+    limit = filteredData.length; // Jika mencari, tampilkan semua hasil
+    viewBtn.style.display = "none"; // Sembunyikan tombol
   } else {
-    limit = isExpanded ? filteredData.length : 5;
-    viewBtn.style.display = "inline-block";
+    limit = isExpanded ? filteredData.length : 5; // Toggle 5 atau Semua
+    viewBtn.style.display = "inline-block"; // Tampilkan tombol
   }
 
+  // Render Baris Tabel
   filteredData.slice(0, limit).forEach((masjid, index) => {
     const realIndex = masjidData.indexOf(masjid) + 1;
-    // Link map dinamis
+    // Template Literal yang Benar untuk Google Maps
     const mapLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(masjid.name + " " + masjid.location + " Malang")}`;
 
     const rowHtml = `
@@ -224,6 +201,7 @@ function renderTable(keyword = "") {
     tableBody.innerHTML += rowHtml;
   });
 
+  // Update Teks Tombol (Show More / Show Less)
   if (keyword.length === 0) {
     const btnTextMore = translations[currentLang].btn_show_more;
     const btnTextLess = translations[currentLang].btn_show_less;
@@ -238,12 +216,26 @@ function renderTable(keyword = "") {
   }
 }
 
-// Initial Render
+// Event Listener Tombol "Tampilkan Semua"
+if (viewBtn) {
+  viewBtn.addEventListener("click", () => {
+    isExpanded = !isExpanded; // Ubah status true/false
+    renderTable(searchInput.value); // Render ulang tabel
+  });
+}
+
+// Event Listener Search
+if (searchInput) {
+  searchInput.addEventListener("keyup", (e) => {
+    renderTable(e.target.value);
+  });
+}
+
+// Jalankan render pertama kali saat web dibuka
 renderTable();
 
-// 7. Back to Top Logic (Floating Right)
+// 7. BACK TO TOP
 const backToTopContainer = document.getElementById("backToTopContainer");
-
 window.addEventListener("scroll", () => {
   if (window.scrollY > 300) {
     backToTopContainer.classList.add("show");
