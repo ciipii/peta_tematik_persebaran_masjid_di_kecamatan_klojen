@@ -203,18 +203,20 @@ function renderTable(keyword = "") {
 
   filteredData.slice(0, limit).forEach((masjid, index) => {
     const realIndex = masjidData.indexOf(masjid) + 1;
+    // Link map dinamis
     const mapLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(masjid.name + " " + masjid.location + " Malang")}`;
+
     const rowHtml = `
       <tr class="fade-in-row">
         <td class="ps-4 fw-bold text-muted">${String(realIndex).padStart(2, "0")}</td>
         <td>
-          <div class="fw-bold" style="color: var(--text-heading)">${masjid.name}</div>
+          <div class="masjid-name">${masjid.name}</div>
           <div class="small text-muted"><i class="bi bi-geo-alt me-1"></i>${masjid.location}</div>
         </td>
         <td class="small" style="color: var(--text-muted)">${masjid.address}</td>
         <td class="text-center">
-          <a href="${mapLink}" target="_blank" class="btn-icon text-decoration-none" title="Google Maps">
-            <i class="bi bi-map-fill"></i>
+          <a href="${mapLink}" target="_blank" class="btn-icon text-decoration-none" title="Google Maps" style="color: var(--primary)">
+            <i class="bi bi-map-fill fs-5"></i>
           </a>
         </td>
       </tr>
@@ -235,15 +237,6 @@ function renderTable(keyword = "") {
     }
   }
 }
-
-viewBtn.addEventListener("click", () => {
-  isExpanded = !isExpanded;
-  renderTable(searchInput.value);
-});
-
-searchInput.addEventListener("keyup", (e) => {
-  renderTable(e.target.value);
-});
 
 // Initial Render
 renderTable();

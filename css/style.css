@@ -210,21 +210,58 @@ section {
   box-shadow: 0 15px 35px rgba(59, 130, 246, 0.6);
 }
 
-/* --- TABLES & INPUTS --- */
-.custom-table tbody tr {
-  background: var(--bg-card);
+/* --- TABLES & INPUTS (FINAL FIX V2) --- */
+
+/* Reset background bawaan bootstrap */
+.custom-table {
+  --bs-table-bg: transparent;
+}
+
+/* 1. HEADER TABLE (FIX: Agar Judul Kolom Terlihat) */
+.custom-table thead th {
+  border: none;
+  font-weight: 700; /* Lebih tebal agar jelas */
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding-bottom: 15px;
+  color: var(--text-muted); /* Default (Light Mode) */
+}
+
+/* KHUSUS DARK MODE: Paksa Header jadi Putih/Terang */
+[data-theme="dark"] .custom-table thead th {
+  color: #f1f5f9 !important; /* Putih Terang */
+}
+
+/* 2. BODY TABLE (Baris Data) */
+.custom-table tbody tr,
+.custom-table tbody td {
+  background-color: var(--bg-card) !important; /* Mengikuti Warna Kartu */
+  color: var(--text-main) !important; /* Mengikuti Warna Teks Utama */
   transition: transform 0.2s, background-color 0.2s;
+  border-bottom: 1px solid var(--border-color);
 }
-.custom-table tbody tr:hover {
-  background-color: var(--table-row-hover);
-  transform: scale(1.01);
+
+/* Efek Hover Baris */
+.custom-table tbody tr:hover td {
+  background-color: var(--table-row-hover) !important;
 }
+
 .custom-table td {
   border: none;
   padding: 20px;
   vertical-align: middle;
-  color: var(--text-main);
 }
+
+/* 3. JUDUL NAMA MASJID (Sinkron dengan JS) */
+.masjid-name {
+  color: var(--text-heading) !important; /* Hitam di Light, Putih di Dark */
+  font-weight: 800;
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+
+/* 4. INPUT SEARCH */
 .input-group-text,
 .form-control {
   background-color: var(--input-bg);
