@@ -90,7 +90,7 @@ const translations = {
     th_nav: "Navigation",
     btn_show_more: "Show All",
     btn_show_less: "Show Less",
-    profile_role: "Informatics Engineering Student",
+    profile_role: "Informatics Engineering Program",
     profile_quote: '"This website was developed as a final project for GIS course."',
     search_placeholder: "Search mosque name...",
   },
